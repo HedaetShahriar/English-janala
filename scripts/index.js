@@ -3,15 +3,23 @@ const navBtns=(text)=>{
     const allBtns=document.querySelectorAll('#navBtns button');
     allBtns.forEach(btn=>btn.classList.remove('btn-active'));
     btn.classList.add('btn-active');
-    if(text==='btnFaq'){
-        window.location.href='#faq';
+    const scrollToSection = (sectionId) => {
+        const targetDiv = document.getElementById(sectionId);
+        const navbarHeight = document.querySelector("nav").offsetHeight;
         
-    }
-    else if(text==='btnLearn'){
-        window.top.location.href='#learn';
-    }
-    else if(text === 'btnLogout'){
-        // window.location.href='#hero';
+        if (targetDiv) {
+            window.scrollTo({
+                top: targetDiv.offsetTop - navbarHeight - 20, 
+                behavior: "smooth"
+            });
+        }
+    };
+
+    if (text === 'btnFaq') {
+        scrollToSection('faq');
+    } else if (text === 'btnLearn') {
+        scrollToSection('learn');
+    } else if (text === 'btnLogout') {
         logout();
         btn.classList.remove('btn-active');
     }
@@ -53,8 +61,9 @@ const login=()=>{
                 position: 'center'
                 ,icon: "success",
                 title: "Login Successful",
+                text: `Welcome, ${username}!`,
                 showConfirmButton: false,
-                timer: 1000
+                timer: 2000
               });
         }
         else{
