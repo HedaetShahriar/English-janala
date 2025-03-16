@@ -19,7 +19,7 @@ const showButton=(btns)=>{
     const btnContainer=document.getElementById('btnContainer');
     for(const btn of btns){
         const buttons=document.createElement('button');
-        buttons.className='btn btn-sm btn-outline btn-primary';
+        buttons.className='btn btn-sm md:btn-md btn-outline btn-primary';
         buttons.onclick=()=>fetchLessons(btn.level_no);
         buttons.id=`btn-${+btn.level_no}`;
         buttons.innerHTML=`<i class="fa-solid fa-book-open"></i>Lesson - ${btn.level_no}
@@ -122,7 +122,7 @@ const showLessons=(lessons)=>{
     for(const lesson of lessons){
         const lessonDiv=document.createElement('div');
         lessonDiv.innerHTML=`
-            <div class="py-8 md:py-10 lg:py-12 px-4 md:px-6 inter bg-white rounded-xl">
+            <div class="py-8 md:py-10 lg:py-12 px-4 md:px-6 drop-shadow-sm inter bg-white rounded-xl">
                 <div class="md:h-[150px] lg:h-[160px]">
                     <h2 class="text-3xl font-bold">
                         ${lesson.word}
