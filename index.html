@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html class="bg-scroll scroll-smooth" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 6</title>
+    <script src="https://kit.fontawesome.com/4983b7a869.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .poppins {
+            font-family: 'Poppins', sans-serif;
+        }
+        .bangla{
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+        .inter{
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="poppins">
+    <!-- header -->
+    <header id="header" class="sticky top-0 z-10 bg-[#F8F8F8]">
+        <!-- Navbar -->
+         <div class="bg-gradient-to-b from-[#F8F8F830] to-[#0000000]  shadow-sm">
+            <nav class="container mx-auto p-2 flex justify-between items-center py-2 md:py-4">
+                <div class="flex items-center gap-1">
+                    <h1 class="md:text-xl lg:text-2xl font-semibold">English</h1>
+                    <img class="" src="./assets/logo.png" alt="">
+                    <h1 class="bangla  md:text-xl lg:text-2xl">জানালা</h1>
+                </div>
+                <div id="navBtns" class="flex gap-2">
+                    <button id="btnFaq" onclick="navBtns(this.id)" class="btn btn-sm btn-outline btn-primary">
+                        <i class="fa-solid fa-circle-question"></i>
+                        <span class="hidden md:block">FAQ</span>
+                    </button>
+                    <button id="btnLearn" onclick="navBtns(this.id)" class="btn btn-sm btn-outline btn-primary">
+                        <i class="fa-solid fa-book-open"></i>
+                        <span class="hidden md:block">Learn</span>
+                    </button>
+                    <button id="btnLogout" onclick="navBtns(this.id)" class="btn btn-sm btn-outline btn-primary">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span class="hidden md:block">Logout</span>
+                    </button>
+                </div>
+            </nav>
+         </div>
+    </header>
+    <!-- Hero section -->
+    <section id="hero" class="container mx-auto p-2">
+        <div class="flex flex-col-reverse md:flex-row justify-between gap-6 items-center my-10 md:my-12 lg:my-14">
+            <div class="text-center md:text-left">
+                <h1 class="font-bold text-3xl md:text-4xl lg:text-5xl"><span class="text-[#00BCFF]">English</span> is Easy!!</h1>
+                <p class="bangla mt-2 md:mt-4">আজ থেকেই আপনার ভাষা শেখার যাত্রা শুরু করুন। আপনি যদি নতুন হন অথবা আপনার দক্ষতা বাড়াতে চান, আমাদের Interactive Lessons আপনাকে নিয়ে যাবে অন্য একটি Level এ</p>
+                <div class="flex flex-col items-center md:items-start  my-2 md:my-4 gap-2 md:gap-4 ">
+                    <input id="username" type="text" placeholder="Enter your name" class="input input-bordered md:w-3/5">
+                    <input id="password" type="password" placeholder="Enter login code (123456)" class="input input-bordered md:w-3/5">
+                </div>  
+                <button onclick="login()" class="btn btn-primary">Get Started</button>
+            </div>
+            <img class="md:w-2/5" src="./assets/hero-student.png" alt="">
+        </div>
+    </section>
+    <!-- main -->
+    <main id="main" class="container mx-auto p-2">
+        <!-- Learn section -->
+        <section id="learn" class="text-center mt-2 md:mt-4 lg:mt-6">
+            <h2 class="font-bold text-2xl md:text-3xl lg:text-4xl"><span class="text-[#00BCFF]">Let's</span> Learn Vocabularies</h1>
+            <!-- lesson buttons -->
+            <div id="btnContainer" class="flex flex-wrap justify-center  gap-2 my-2 md:gap-4 md:my-4">
+                <!--Fetching buttons from api -->
+            </div>
+            <div id="loader" class="bg-[#F8F8F8] rounded-3xl p-7  hidden">
+                <span class="loading loading-dots loading-xl"></span>
+            </div>
+            <!-- lesson cards -->
+            <div id="lessonContainer" class="bg-[#F8F8F8] bangla rounded-3xl p-3 md:p-5 lg:p-7 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 lg:gap-5">
+                
+                <div id="lessonSelect" class="py-16 col-span-3 ">
+                    <p>আপনি এখনো কোন Lesson Select করেন ন</p>
+                    <h3 class="font-medium text-4xl mt-3">একটি Lesson Select করুন।</h3>
+                </div>
+                
+            </div>
+            <!-- modal -->
+            <dialog id="activateModal" class="modal modal-bottom  sm:modal-middle rounded-xl p-2 items-center">
+                <div class="modal-box p-4 md:p-6">
+                    <div id = "modalContainer">
+                        <!-- <div class="border-slate-200 border text-left p-6 rounded-xl font-semibold text-2xl ">
+                            <h1 class="text-4xl mb-8">Lesson (<i class="fa-solid fa-microphone-lines"></i>: aminal)</h1>
+
+                            <h2 class="mb-2.5">Meaning</h2>
+                            <h2 class="font-medium bangla">sfsnsl</h2>
+
+                            <h2 class="mt-8">Example</h2>
+                            <p class="font-normal mt-2">the kids are eager to open njnkjtheir gifts.</p>
+
+                            <h2 class="font-medium bangla mt-8">সমার্থক শব্দ গুলো</h2>
+                            <div class="flex gap-2 mt-2.5 font-normal text-xl">
+                                <button class="btn">Entuasiatic</button>
+                                <button class="btn">Excited</button>
+                                <button class="btn">keen</button>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="modal-action">
+                        <form method="dialog">
+                        <!-- if there is a button in form, it will close the modal -->
+                            <button class="btn btn-primary">Complete Learning</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
+        </section>
+        <!-- FAQ section -->
+        <section id="faq" class="my-8 md:my-12 lg:my-16">
+            <h2 class="font-bold text-2xl md:text-3xl lg:text-4xl text-center"><span class="text-[#00BCFF]">Frequently</span> Asked Questions</h1>
+            <!-- FAQ card 1 -->
+            <div class="bg-[#F8F8F8] mt-4 py-3 px-1 rounded-2xl collapse">
+                <input onclick="toggle(this.id)" id="cb1" type="checkbox" />
+                <div class="collapse-title flex justify-between">
+                    <p class="font-medium text-lg">1. what is the difference between <code>var</code>, <code>let</code>, and <code>const</code>?</p>
+                    <div>
+                        <span id="plus-cb1" ><i class="fa-solid fa-plus "></i></span>
+                        <span id="minus-cb1" class="hidden" ><i class="fa-solid fa-minus "></i></span>
+                    </div>
+                </div>
+                <p id="answer" class="text-[#62748E] mt-2 collapse-content">
+                    - <strong>var:</strong> Function-scoped, can be redeclared & reassigned, hoisted with `undefined`. <br> 
+                    - <strong>let:</strong> Block-scoped, cannot be redeclared, hoisted but not initialized. <br>
+                    - <strong>const:</strong> Block-scoped, cannot be reassigned, must be initialized at declaration.
+                </p>
+            </div>
+            <!-- FAQ card 2 -->
+            <div class="bg-[#F8F8F8] mt-4 py-3 px-1 rounded-2xl collapse">
+                <input onclick="toggle(this.id)" id="cb2" type="checkbox" />
+                <div class="flex justify-between collapse-title">
+                    <p class="font-medium text-lg">
+                        2. What is the difference between <code>map()</code>, <code>forEach()</code>, and <code>filter()</code>?</p>
+                    <div>
+                        <span id="plus-cb2" ><i class="fa-solid fa-plus "></i></span>
+                        <span id="minus-cb2" class="hidden" ><i class="fa-solid fa-minus "></i></span>
+                    </div>
+                </div>
+                <p id="answer2" class="text-[#62748E] mt-2 collapse-content">
+                    - <strong>map()</strong>: Returns a new array with modified values.  <br>
+                    - <strong>forEach()</strong>: Loops through elements but does not return a new array.  <br>
+                    - <strong>filter()</strong>: Returns a new array with elements that satisfy a condition.
+                </p>
+            </div>
+            <!-- FAQ card 3 -->
+            <div class="bg-[#F8F8F8] mt-4 py-3 px-1 rounded-2xl collapse">
+                <input onclick="toggle(this.id)" id="cb3" type="checkbox" />
+                <div class="flex justify-between collapse-title">
+                    <p class="font-medium text-lg">3. Explain arrow functions and how they are different from regular functions?</p>
+                    <div>
+                        <span id="plus-cb3" ><i class="fa-solid fa-plus "></i></span>
+                        <span id="minus-cb3" class="hidden" ><i class="fa-solid fa-minus "></i></span>
+                    </div>
+                </div>
+                <p id="answer3" class="text-[#62748E] mt-2 collapse-content">
+                    <strong>Arrow functions (`=>`)</strong> provide a shorter syntax and do not bind `this`. <br>
+                    Differences: <br>
+                    - No own `this` (inherits from parent scope).  <br>
+                    - Cannot be used as constructors.  <br>
+                    - No `arguments` object (use rest parameters instead).
+                </p>
+            </div>
+            <!-- FAQ card 4 -->
+            <div class="bg-[#F8F8F8] mt-4 py-3 px-1 rounded-2xl collapse">
+                <input onclick="toggle(this.id)" id="cb4" type="checkbox" />
+                <div class="flex justify-between collapse-title">
+                    <p class="font-medium text-lg">4. How do JavaScript Promises work?</p>
+                    <div>
+                        <span id="plus-cb4" ><i class="fa-solid fa-plus "></i></span>
+                        <span id="minus-cb4" class="hidden" ><i class="fa-solid fa-minus "></i></span>
+                    </div>
+                </div>
+                <p  id="answer4" class="text-[#62748E] mt-2 collapse-content">
+                    A <strong>Promise</strong> represents a future value that can be `fulfilled`, `rejected`, or `pending`. <br>  
+                    - Use `.then()` for success handling.  <br>
+                    - Use `.catch()` for error handling.  <br>
+                    - Use `async/await` for cleaner asynchronous code.
+                </p>
+            </div>
+            <!-- FAQ card 5 -->
+            <div class="bg-[#F8F8F8] mt-4 py-3 px-1 rounded-2xl collapse">
+                <input onclick="toggle(this.id)" id="cb5" type="checkbox" />
+                <div class="flex justify-between collapse-title">
+                    <p class="font-medium text-lg">5. How do closures work in JavaScript?</p>
+                    <div>
+                        <span id="plus-cb5" ><i class="fa-solid fa-plus "></i></span>
+                        <span id="minus-cb5" class="hidden" ><i class="fa-solid fa-minus "></i></span>
+                    </div>
+                </div>
+                <div class="text-[#62748E] mt-2 collapse-content">
+                    <p>A <strong>closure</strong> allows a function to remember variables from its parent scope, even after the parent function has executed.  
+                    Example:</p>
+                    <pre class="bg-[#292524] w-full text-white p-1 rounded-xl mt-2 text-sm">
+    <code>
+        function outer() {
+            let count = 0;
+            return function inner() {
+                count++;
+                console.log(count);
+            };
+        }
+        const counter = outer();
+        counter(); // 1
+        counter(); // 2
+    </code>
+                    </pre>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- footer -->
+    <footer id="footer" class="border-t-2 border-[#FFEBEB]">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between py-6 md:py-8 lg:py-10 p-2">
+            <div class="text-center md:text-left">
+                <div class="flex justify-center md:justify-normal items-center gap-1">
+                    <h1 class="text-xl font-semibold">English</h1>
+                    <img src="./assets/logo.png" alt="">
+                    <h1 class="bangla text-xl">জানালা</h1>
+                </div>
+                <p class="bangla font-medium text-xl my-1 md:my-2 lg:my-3">ইংরেজি শিখুন সহজে</p>
+                <p>Providing ED-Tech Applications since 2025</p>
+            </div>
+            <div class="flex flex-col items-center md:items-start">
+                <h3 class="font-semibold text-lg md:text-base mt-6 md:mt-0 ">FOllOW US</h3>
+                <div class="flex gap-3 items-center mt-1 md:mt-2">
+                    <a href="https://www.facebook.com/Hedaetshahriarhimon/" target="_blank">
+                        <img src="./assets/fb-thumb.png" alt="">
+                    </a>
+                    <a href="https://www.youtube.com/" target="_blank">
+                        <img src="./assets/youtube-thumb.png" alt="">
+                    </a>
+                    <a href="https://www.instagram.com/" target="_blank">
+                        <img src="./assets/instagram-thumb.png" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="./scripts/index.js"></script>
+    <script src="./scripts/lession.js"></script>
+</body>
+</html>
